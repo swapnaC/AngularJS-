@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="listApp">
+<head>
+<meta charset="UTF-8">
+<title>Ex:4-AngularJS Adding and Removing List Elements dynamically</title>
+<style type="text/css">
+	ul {
+		list-style: none;
+	}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js">
+</script>
+<script>
+	var listApp = angular.module('listApp', []);
+	listApp.controller('listCntrl', function ($scope) {
+	$scope.listElements = ['Fijita', 'Apple', 'Orange', 'Tomatoes'];
+
+	$scope.removeElet = function(Element) {
+		var i = $scope.listElements.indexOf(Element);
+		$scope.listElements.splice(i,1);
+	};
+
+	$scope.addElet = function() {
+		$scope.listElements.push($scope.enteredElet);
+		$scope.enteredElet = '';
+	};
+
+});
+
+</script>
+</head>
+<body ng-controller="listCntrl">
+	<ul>
+		<li ng-repeat="Elemnts in listElements"> {{ Elemnts }} 
+		<a href="" ng-click="removeElet(Elemnts)">remove</a>
+		</li>
+	</ul>
+
+	<form ng-submit="addElet()">
+		<input type="text" ng-model="enteredElet" />
+		<input type="submit" value="AddToList" />
+	</form>
+
+</body>
+</html>
